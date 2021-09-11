@@ -63,3 +63,58 @@ const galleryItems = [
     description: 'Lighthouse Coast Sea',
   },
 ];
+
+
+const listRef = document.querySelector('.js-gallery');
+
+// // Создание и рендер для строк
+// const createGalleryCard = (items) => {
+//   return listRef.insertAdjacentHTML(
+//     'beforeend',
+//     items.map(({ preview, original, description }) => {
+//       return `
+//       <li class="gallery__item">
+//         <a
+//           class="gallery__link"
+//           href="${original}"
+//         >
+//           <img
+//             class="gallery__image"
+//             src="${preview}"
+//             data-source="${original}"
+//             alt="${description}"
+//           />
+//         </a>
+//       </li>`
+//     })
+//       .join('')
+//   );
+// };
+// const markup = createGalleryCard(galleryItems);
+
+
+// Создание и рендер для обьекта
+const createGalleryCard = ({ preview, original, description }) => {
+  const itemEl = document.createElement('li');
+  itemEl.classList.add('gallery__item');
+
+  const linkEl = document.createElement('a');
+  linkEl.classList.add('gallery__link');
+  linkEl.href = `${original}`;
+
+  const imageEl = document.createElement('img');
+  imageEl.classList.add('gallery__image');
+  imageEl.src = `${preview}`;
+  imageEl.dataset.source = `${original}`;
+  imageEl.alt = `${description}`;
+
+  linkEl.append(imageEl);
+  itemEl.append(linkEl);
+  
+  return itemEl;
+};
+
+const markupElements = galleryItems.map(createGalleryCard);
+console.log(markupElements);
+
+listRef.append(...markupElements);
