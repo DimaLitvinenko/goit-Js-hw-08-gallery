@@ -74,7 +74,7 @@ const refs = {
 
 const { list, container, image, closeBtn, overlay } = refs;
 
-// - Создание и рендеринг разметки для обьекта
+// ВАРИАНТ 1- Создание и рендеринг разметки для обьекта
 // const createGalleryCard = ({ preview, original, description }) => {
 //   const itemEl = document.createElement('li');
 //   itemEl.classList.add('gallery__item');
@@ -98,7 +98,7 @@ const { list, container, image, closeBtn, overlay } = refs;
 // console.log(markupElements);
 // list.append(...markupElements);
 
-// - Создание и рендеринг разметки для строки
+// ВАРИАНТ 2- Создание и рендеринг разметки для строки
 const createGalleryCard = items => {
   return list.insertAdjacentHTML(
     'beforeend',
@@ -133,7 +133,6 @@ const itemGalleryHandler = event => {
   if (event.target.nodeName !== 'IMG') {
     return;
   };
-
   event.preventDefault();
 
   container.classList.add('is-open');
@@ -156,7 +155,7 @@ const modalCloseHandler = () => {
 
 // - Закрытие модального окна по нажатию клавиши `ESC`.
 const modalCloseByEscHandler = event => {
-  console.log(event.key);
+  // console.log(event.key);
   // console.log(event.code);
   if (event.key === 'Escape') {
     modalCloseHandler();
@@ -164,8 +163,8 @@ const modalCloseByEscHandler = event => {
 };
 
 // - Закрытие модального окна по клику на `div.lightbox__overlay`.
-const modalCloseByOverlayHandler = event => {
-  console.log(event.target);
+const modalCloseByOverlayHandler = () => {
+  // console.log(event.target);
   modalCloseHandler();
 };
 
@@ -180,3 +179,24 @@ overlay.addEventListener('click', modalCloseByOverlayHandler)
 
 // - Пролистывание изображений галереи в открытом модальном окне клавишами "влево"
 //   и "вправо".
+
+  list.addEventListener('keydown', ({target, currentTarget, key}) => {
+    if (key !== 'ArrowLeft' && key !== 'ArrowRight') {
+      return;
+    };
+
+    console.log(key);
+    console.log(`currentTarget:`, currentTarget);
+    console.log(`target:`, target);
+
+    // list.removeEventListener('click', itemGalleryHandler);
+    // event.preventDefault();
+
+    const collection = currentTarget.children;
+    collection.map((el) => {
+      console.log(el);
+    })
+    
+    // image.src = event.target.nextElementSibling.src;
+  // image.alt = event.target.alt;
+});
