@@ -64,7 +64,7 @@ const galleryItems = [
   },
 ];
 
-const gallery = {
+const refs = {
   list: document.querySelector('.js-gallery'),
   container: document.querySelector('.lightbox'),
   image: document.querySelector('.lightbox__image'),
