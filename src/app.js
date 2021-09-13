@@ -74,33 +74,6 @@ const refs = {
 
 const { list, container, image, closeBtn, overlay } = refs;
 
-// - Создание и рендеринг разметки для строки
-const createGalleryCard = items => {
-  return list.insertAdjacentHTML(
-    'beforeend',
-    items.map(({ preview, original, description }) => {
-      return `
-      <li class="gallery__item">
-        <a
-          class="gallery__link"
-          href="${original}"
-        >
-          <img
-            class="gallery__image"
-            src="${preview}"
-            data-source="${original}"
-            alt="${description}"
-          />
-        </a>
-      </li>`
-    })
-      .join('')
-  );
-};
-
-const markup = createGalleryCard(galleryItems);  // вызов функции 
-
-
 // - Создание и рендеринг разметки для обьекта
 // const createGalleryCard = ({ preview, original, description }) => {
 //   const itemEl = document.createElement('li');
@@ -124,6 +97,31 @@ const markup = createGalleryCard(galleryItems);  // вызов функции
 // const markupElements = galleryItems.map(createGalleryCard);
 // console.log(markupElements);
 // list.append(...markupElements);
+
+// - Создание и рендеринг разметки для строки
+const createGalleryCard = items => {
+  return list.insertAdjacentHTML(
+    'beforeend',
+    items.map(({ preview, original, description }) => {
+      return `
+      <li class="gallery__item">
+        <a
+          class="gallery__link"
+          href="${original}"
+        >
+          <img
+            class="gallery__image"
+            src="${preview}"
+            data-source="${original}"
+            alt="${description}"
+          />
+        </a>
+      </li>`
+    })
+      .join('')
+  );
+};
+const markup = createGalleryCard(galleryItems);  // вызов функции 
 
 
 // - Реализация делегирования на галерее `ul.js-gallery` и получение `url` большого
@@ -175,7 +173,7 @@ list.addEventListener('click', itemGalleryHandler);
 
 closeBtn.addEventListener('click', modalCloseHandler);
 
-window.addEventListener('keyup', modalCloseByEscHandler);
+window.addEventListener('keydown', modalCloseByEscHandler);
 
 overlay.addEventListener('click', modalCloseByOverlayHandler)
 
