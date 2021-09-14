@@ -59,21 +59,26 @@ const createGalleryCard = items => {
       .join('')
   );
 };
+
 createGalleryCard(galleryItems, galleryItems.length);  // вызов функции 
 
 // - Закрытие модального окна по нажатию клавиши `ESC`.
 const itemGalleryEscHandler = ({ code }) => {
-  
   if (code === 'Escape') {
     itemGalleryCloseHandler();
   };
+
   console.log(code);
 };
 
 // - Пролистывание изображений галереи в открытом модальном окне клавишами "влево"
 //   и "вправо".
 const scrollGalleryHandler = ({ code }) => {
-  let currentIndex = galleryItems.findIndex(item => item.description === image.alt || item.original === image.src);
+  let currentIndex = galleryItems.findIndex(
+    item =>
+      item.description === image.alt
+      || item.original === image.src
+  );
   
   if (code === "ArrowLeft") {
     if (currentIndex !== 0) {
@@ -90,7 +95,9 @@ const scrollGalleryHandler = ({ code }) => {
       currentIndex = galleryItems.length - 1;
     };
   };
+
   console.log(currentIndex);
+  
   image.alt = galleryItems[currentIndex].description;
   image.src = galleryItems[currentIndex].original;
 };
@@ -103,6 +110,7 @@ const itemGalleryOpenHandler = ({ target, currentTarget }) => {
   if (target.nodeName !== 'IMG') {
     return;
   };
+
   console.log(target);
   console.log(currentTarget);
   
@@ -113,6 +121,7 @@ const itemGalleryOpenHandler = ({ target, currentTarget }) => {
   container.classList.add('is-open');
   image.src = target.dataset.source;
   image.alt = target.alt;
+  
   console.log(image.alt);
 };
 
