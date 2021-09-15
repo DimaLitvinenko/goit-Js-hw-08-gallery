@@ -60,27 +60,55 @@ const createGalleryCard = items => {
   );
 };
 
-createGalleryCard(galleryItems, galleryItems.length);  // вызов функции 
+const markup = createGalleryCard(galleryItems, galleryItems.length);  // вызов функции 
 
 // - Закрытие модального окна по нажатию клавиши `ESC`.
-const itemGalleryEscHandler = ({ code }) => {
-  if (code === 'Escape') {
+const itemGalleryEscHandler = ({ key }) => {
+  if (key === 'Escape') {
     itemGalleryCloseHandler();
   };
 
-  console.log(code);
+  console.log(key);
 };
 
 // - Пролистывание изображений галереи в открытом модальном окне клавишами "влево"
 //   и "вправо".
-const scrollGalleryHandler = ({ code }) => {
+const scrollGalleryHandler = ({ key }) => {
+  // let activeIndex = null;
+  // markup.forEach((el, ind) => {
+  //   if (el.includes(e.target.src)) {
+  //     activeIndex = ind;
+  //     return;
+  //   }
+  // });
+  
+  // if (key === "ArrowRight" && galleryItems.length - 1 > activeIndex) {
+  //   activeIndex += 1;
+  //   refs.imgInModal.src = galleryItems[activeIndex].original;
+  //   return;
+  // }
+  // if (key === "ArrowLeft" && activeIndex > 0) {
+  //   activeIndex -= 1;
+  //   refs.imgInModal.src = galleryItems[activeIndex].original;
+  //   return;
+  // }
+  // if (key === "ArrowRight" && activeIndex === galleryItems.length - 1) {
+  //   activeIndex = 0;
+  //   refs.imgInModal.src = galleryItems[activeIndex].original;
+  //   return;
+  // }
+  // if (key === "ArrowLeft" && activeIndex === 0) {
+  //   activeIndex = galleryItems.length - 1;
+  //   refs.imgInModal.src = galleryItems[activeIndex].original;
+  //   return;
+  // }
   let currentIndex = galleryItems.findIndex(
     item =>
       item.description === image.alt
       || item.original === image.src
   );
   
-  if (code === "ArrowLeft") {
+  if (key === "ArrowLeft") {
     if (currentIndex !== 0) {
       currentIndex -= 1;
     } else {
@@ -88,7 +116,7 @@ const scrollGalleryHandler = ({ code }) => {
     };
   };
 
-  if (code === "ArrowRight") {
+  if (key === "ArrowRight") {
     if (currentIndex !== galleryItems.length - 1) {
       currentIndex += 1;
     } else {
