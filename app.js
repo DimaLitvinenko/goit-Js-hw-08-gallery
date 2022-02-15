@@ -63,7 +63,7 @@ const scrollGalleryHandler = ({ key }) => {
 };
 
 // - Реализация делегирования на галерее `ul.js-gallery` и получение `url` большого изображения.
-const itemGalleryOpenHandler = ({ target, currentTarget }) => {
+const itemGalleryOpenHandler = ({ event, target, currentTarget }) => {
   if (target.nodeName !== 'IMG') {
     return;
   };
